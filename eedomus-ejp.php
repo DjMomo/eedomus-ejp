@@ -80,7 +80,7 @@ $xml = '<?xml version="1.0" encoding="UTF-8"?>';
 $xml .= '<ejp>';
 $xml .= '<aujourdhui>'.$str_EJP_auj.'</aujourdhui>';
 $xml .= '<demain>'.$str_EJP_dem.'</demain>';
-$xml .= '<jours_restants>'.$str_EJP_nb.'</jours_restants>';
+$xml .= '<decompte>'.$str_EJP_nb.'</decompte>';
 $xml .= '</ejp>';
 echo $xml;
 
