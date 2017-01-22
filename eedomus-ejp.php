@@ -3,7 +3,7 @@
 **												
 ** Script PHP pour eedomus (toutes versions)
 **
-** Script qui permet de récupérer les données EJP de chaque zone :
+** Script qui permet d'afficher au format XML les données EJP d'une zone prédéfinie :
 **  - état EJP du jour
 **  - état EJP du lendemain
 **  - décompte des jours EJP
