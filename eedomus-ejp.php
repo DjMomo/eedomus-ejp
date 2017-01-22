@@ -9,10 +9,11 @@
 **  - décompte des jours EJP
 **
 *********
-** Quelle que soit la donnée à récupérer, un seul argument est à préciser dans l'URL, "NomZome" :
+** Quelle que soit la donnée à afficher, un seul argument est à préciser dans l'URL
+** d'appel du script, "NomZome" :
 **           eedomus-ejp.php?zone="NomZone"
 **
-** L'argument "NomZone" pouvant être l'une des 4 zones EJP :
+** L'argument "NomZone" devant être l'une des 4 zones EJP :
 **                                      - nord,
 **                                      - ouest,
 **                                      - paca,
