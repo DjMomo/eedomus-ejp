@@ -1,7 +1,7 @@
 <?php
 /*************************************************************************************
 **												
-** Script EJP pour eedomus (toutes versions)
+** Script PHP pour eedomus (toutes versions)
 **
 ** Script qui permet de récupérer les données EJP de chaque zone :
 **  - état EJP du jour
