@@ -6,7 +6,7 @@
 ** Script qui permet de récupérer les données EJP de chaque zone :
 **  - état EJP du jour
 **  - état EJP du lendemain
-**  - nombre de jours EJP restants
+**  - décompte des jours EJP
 **
 *********
 ** Quelle que soit la donnée à récupérer, un seul argument est à préciser dans l'URL, "NomZome" :
