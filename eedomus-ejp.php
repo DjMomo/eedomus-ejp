@@ -31,17 +31,16 @@ $str_maj_zone = strtoupper($str_min_zone);
 // Période de conservation des données en cache (en mn)
 $validite_cache = 15;
 
+$validite_cache = $validite_cache * 60;
+
 // Date du jour au format demandé par l'API du site
 $aujourdhui = date("Y-m-d");
 
-// Initialisation des timestamp de mise à jour des variables à récupérer sur le site
-if (!isset ($time_EJP_jour))
-	saveVariable($time_EJP_jour,0);
-if (!isset ($time_EJP_nb))
-	saveVariable($time_EJP_nb,0);
+$time_EJP_jour = loadVariable("time_EJP_jour");
+$time_EJP_nb = loadVariable("time_EJP_nb");
 
 // On interroge le site toutes les $validite_cache minutes minimum pour éviter les requêtes HTTP inutiles
-if ((time() - loadVariable($time_EJP_jour)) < (60 * $validite_cache))
+if ((time() - $time_EJP_jour) > $validite_cache)
 {
 	$json_etat_EJP = jsonToXML(httpQuery($URL_etat.$aujourdhui));
 
@@ -52,29 +51,28 @@ if ((time() - loadVariable($time_EJP_jour)) < (60 * $validite_cache))
 	$str_EJP_auj = xpath($json_etat_EJP,"//JourJ/Ejp".$str_zone);
 	$str_EJP_dem = xpath($json_etat_EJP,"//JourJ1/Ejp".$str_zone);
 
-	saveVariable($time_EJP_jour,time());
-	saveVariable($str_EJP_auj,$str_EJP_auj);
-	saveVariable($str_EJP_dem,$str_EJP_dem);
+	saveVariable("time_EJP_jour",time());
+	saveVariable("str_EJP_auj",$str_EJP_auj);
+	saveVariable("str_EJP_dem",$str_EJP_dem);
 }
 else
 {
 	// Rappel des valeurs précédemment sauvegardées
-	loadVariable($str_EJP_auj);
-	loadVariable($str_EJP_dem);
+	$str_EJP_auj = loadVariable("str_EJP_auj");
+	$str_EJP_dem = loadVariable("str_EJP_dem");
 }
 
 // On interroge le site toutes les $validite_cache miniutes minimum pour éviter les requêtes HTTP inutiles
-if ((time() - loadVariable($time_EJP_nb)) < (60 * $validite_cache))
+if ((time() - $time_EJP_nb) > $validite_cache)
 {
 	$str_nb_total_jours = xpath(jsonToXML(httpQuery($URL_params."param.total.days.".$str_min_zone)),"param.total.days.".$str_min_zone);
-	$str_nb_jours = $str_nb_total_jours - xpath(jsonToXML(httpQuery($URL_histo)),"/".$str_maj_zone."/Total");
+	$str_EJP_nb = $str_nb_total_jours - xpath(jsonToXML(httpQuery($URL_histo)),"/".$str_maj_zone."/Total");
 
-	saveVariable($time_EJP_nb,time());
-	saveVariable($str_EJP_nb,$str_EJP_nb);
+	saveVariable("time_EJP_nb",time());
+	saveVariable("str_EJP_nb",$str_EJP_nb);
 }
 else
-	loadVariable($str_EJP_nb);
-
+	$str_EJP_nb = loadVariable("str_EJP_nb");
 
 // Génération du XML
 $xml = '<?xml version="1.0" encoding="UTF-8"?>';
